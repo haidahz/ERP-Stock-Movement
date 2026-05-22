@@ -1,0 +1,6 @@
+@ERP_Stock_Movement_HostAddress = http://localhost:5094
+
+GET {{ERP_Stock_Movement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
