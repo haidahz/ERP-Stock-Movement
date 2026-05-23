@@ -1,4 +1,5 @@
 using ERP_Stock_Movement.Inventory.Models;
+using ERP_Stock_Movement.Clients;
 using ERP_Stock_Movement.Orders.Clients;
 using ERP_Stock_Movement.Orders.Models;
 using ERP_Stock_Movement.Orders.Repositories;
@@ -44,7 +45,8 @@ public class OrderService
             var product = await _productClient.GetByIdAsync(line.ProductId);
             if (product is null)
             {
-                return (false, null, $"Product {line.ProductId} was not found.");
+                return (false, null,
+                    $"Product {line.ProductId} was not found in the product catalog. Use GET /api/product to see valid ids, or create the product first.");
             }
 
             orderLines.Add(new OrderItem

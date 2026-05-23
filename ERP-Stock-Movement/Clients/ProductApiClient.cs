@@ -1,7 +1,7 @@
 using System.Net.Http.Json;
 using ERP_Stock_Movement.Products.Models;
 
-namespace ERP_Stock_Movement.Orders.Clients;
+namespace ERP_Stock_Movement.Clients;
 
 public class ProductApiClient : IProductApiClient
 {

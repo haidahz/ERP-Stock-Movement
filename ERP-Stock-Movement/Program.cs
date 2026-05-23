@@ -1,6 +1,7 @@
 using ERP_Stock_Movement.Inventory.Data;
 using ERP_Stock_Movement.Inventory.Repositories;
 using ERP_Stock_Movement.Inventory.Services;
+using ERP_Stock_Movement.Clients;
 using ERP_Stock_Movement.Orders.Clients;
 using ERP_Stock_Movement.Orders.Data;
 using ERP_Stock_Movement.Orders.Repositories;
@@ -57,7 +58,8 @@ using (var scope = app.Services.CreateScope())
     var inventoryDb = scope.ServiceProvider.GetRequiredService<InventoryDbContext>();
     var orderDb = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
 
-    if (app.Environment.IsDevelopment())
+    var resetOnStartup = builder.Configuration.GetValue<bool>("Database:ResetOnStartup");
+    if (resetOnStartup)
     {
         productDb.Database.EnsureDeleted();
         inventoryDb.Database.EnsureDeleted();

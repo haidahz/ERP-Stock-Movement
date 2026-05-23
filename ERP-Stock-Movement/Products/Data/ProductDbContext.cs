@@ -11,6 +11,14 @@ namespace ERP_Stock_Movement.Products.Data
         {
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.Property(p => p.Id).ValueGeneratedNever();
+            });
+        }
     }
 }

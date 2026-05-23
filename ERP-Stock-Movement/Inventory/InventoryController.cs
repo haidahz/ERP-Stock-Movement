@@ -36,13 +36,25 @@ public class InventoryController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> SetStock([FromBody] SetStockRequest request)
     {
-        return Ok(await _service.SetStockAsync(request));
+        var (success, item, error) = await _service.SetStockAsync(request);
+        if (!success)
+        {
+            return NotFound(new { message = error });
+        }
+
+        return Ok(item);
     }
 
     [HttpPost("add")]
     public async Task<IActionResult> AddStock([FromBody] SetStockRequest request)
     {
-        return Ok(await _service.AddStockAsync(request));
+        var (success, item, error) = await _service.AddStockAsync(request);
+        if (!success)
+        {
+            return NotFound(new { message = error });
+        }
+
+        return Ok(item);
     }
 
     [HttpPost("try-deduct")]

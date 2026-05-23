@@ -34,9 +34,15 @@ namespace ERP_Stock_Movement.Products
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(CreateProductRequest request)
         {
-            return Ok(await _service.Create(product));
+            var (success, product, error) = await _service.CreateAsync(request);
+            if (!success)
+            {
+                return BadRequest(new { message = error });
+            }
+
+            return CreatedAtAction(nameof(GetById), new { id = product!.Id }, product);
         }
     }
 }

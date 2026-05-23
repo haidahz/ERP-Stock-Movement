@@ -91,7 +91,7 @@ public class InventoryRepository
                     return new TryDeductResponse
                     {
                         Success = false,
-                        Message = $"Insufficient stock for product {line.ProductId}."
+                        FailedProductId = line.ProductId
                     };
                 }
             }
