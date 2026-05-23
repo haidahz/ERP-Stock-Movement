@@ -1,6 +1,38 @@
 @ERP_Stock_Movement_HostAddress = http://localhost:5094
 
-GET {{ERP_Stock_Movement_HostAddress}}/weatherforecast/
-Accept: application/json
+### Create product
+POST {{ERP_Stock_Movement_HostAddress}}/api/product
+Content-Type: application/json
 
-###
+{
+  "name": "Widget",
+  "price": 19.99
+}
+
+### List products
+GET {{ERP_Stock_Movement_HostAddress}}/api/product
+
+### Set inventory
+POST {{ERP_Stock_Movement_HostAddress}}/api/inventory
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 100
+}
+
+### Get inventory for product
+GET {{ERP_Stock_Movement_HostAddress}}/api/inventory/1
+
+### Create order
+POST {{ERP_Stock_Movement_HostAddress}}/api/order
+Content-Type: application/json
+
+{
+  "items": [
+    { "productId": 1, "quantity": 5 }
+  ]
+}
+
+### List orders
+GET {{ERP_Stock_Movement_HostAddress}}/api/order

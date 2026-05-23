@@ -21,6 +21,18 @@ namespace ERP_Stock_Movement.Products
             return Ok(await _service.GetAll());
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var product = await _service.GetById(id);
+            if (product is null)
+            {
+                return NotFound(new { message = $"Product {id} was not found." });
+            }
+
+            return Ok(product);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
